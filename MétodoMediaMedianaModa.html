@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <script>
+        // Antonio Jerónimo Ramirez
+        // Rubén Ramírez Alba
+
+        var numeros = [];
+        var continuar = true;
+        while (continuar) {
+            var numero = prompt("Escribe un número o pulsa Cancelar para terminar:");
+            if (numero === null) {
+                continuar = false;
+            } else {
+                numero = parseInt(numero);
+                if (!isNaN(numero)) {
+                    numeros.push(numero);
+                } else {
+                    alert("¡Ey! Eso no parece ser un número válido.");
+                }
+            }
+        }
+        
+        var total = 0;
+        for(var i = 0; i < numeros.length; i++) {
+            total += numeros[i];
+        }
+        
+        var promedio = total / numeros.length;
+        var modas = [];
+        var conteoModa = 0;
+        for (var i = 0; i < numeros.length; i++) {
+            var num = numeros[i];
+            var conteo = 0;
+            var esModa = false;
+            for (var j = 0; j < modas.length; j++) {
+                if (modas[j] === num) {
+                    esModa = true;
+                    break;
+                }
+            }
+            if (!esModa) {
+                for (var k = 0; k < numeros.length; k++) {
+                    if (numeros[k] === num) {
+                        conteo++;
+                    }
+                }
+                if (conteo > conteoModa) {
+                    modas = [num];
+                    conteoModa = conteo;
+                } else if (conteo === conteoModa) {
+                    modas.push(num);
+                }
+            }
+        }
+        
+        numeros.sort();
+        var mediana;
+        if (numeros.length % 2 === 0) {
+            mediana = (numeros[numeros.length / 2 - 1] + numeros[numeros.length / 2]) / 2;
+        } else {
+            mediana = numeros[(numeros.length - 1) / 2];
+        }
+        var linea = "--------------------------------------";
+        var modaFinal = "La moda(s) es/son: ";
+        for (var i = 0; i < modas.length; i++) {
+            modaFinal += modas[i];
+            if (i !== modas.length - 1) {
+                modaFinal += ", ";
+            }
+        }
+        alert(linea + "\nEl promedio es: " + promedio + "\n" + linea + "\n" + modaFinal + "\n" + linea + "\nLa mediana es: " + mediana + "\n" + linea);
+    </script>
+</body>
+</html>
